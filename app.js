@@ -95,6 +95,26 @@ app.post('/register', (req, res) => {
     })
 })
 
+//验证用户名和密码
+app.post('/login',(req,res)=> {
+
+    const body = req.body
+    //console.log(body)
+    
+
+    const sql3 = 'select * from blog_users where username=? and password=?'
+
+    conn.query(sql3,[body.username,body.password],(err,result)=>{
+        if(err) return res.send({msg:'用户登陆失败',status:400})
+        //console.log(result)
+        if(result.length !== 1) return res.send({msg:'用户登录失败,请重新输入',status:400})
+        res.send({msg:"登陆成功",status:200})
+    })
+
+
+    
+})
+
 
 
 

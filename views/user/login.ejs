@@ -32,7 +32,8 @@
     </div>
 
     <div class="form-group">
-      <input type="password" name="password" id="password" class="form-control input-lg" placeholder="密码" required value="123">
+      <input type="password" name="password" id="password" class="form-control input-lg" placeholder="密码" required
+        value="123">
     </div>
 
     <div class="form-group">
@@ -46,7 +47,26 @@
 
   <script src="/node_modules/jquery/dist/jquery.min.js"></script>
   <script>
-
+    $(function () {
+      $('#form').on('submit', function (e) {
+        //alert('ok')
+        e.preventDefault(),
+        $.ajax({
+          type: 'post',
+          url: '/login',
+          data: $('#form').serialize(),
+          success: function (res) {
+            // console.log(res)
+            if(res.status != 200) {
+              alert('用户名或密码错误,请重新输入!')
+            } else {
+              alert('恭喜你,登陆成功')
+              location.href="/"
+            }
+          }
+        })
+      })
+    })
   </script>
 </body>
 
